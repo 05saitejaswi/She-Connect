@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report an Incident | SafeHer</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      
+        /* Top Bar for Resources */
+        .top-bar {
+            color: #f49ebf;
+            padding: 10px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* Form Styling */
+        .form {
+            margin-top: 20px;
+            max-width: 600px; /* Center the form */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        label {
+            display: block;
+            color: #f7abc8; /* Pink label color */
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            border: 1px solid #ddd; /* Light grey border */
+            border-radius: 4px;
+            margin-bottom: 20px;
+            outline-color: #ff5e9d; /* Pink outline on focus */
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical; /* Allows resizing only vertically */
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1rem;
+            color: #fff;
+            background-color: #ff5e9d; /* Pink button */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #e83671; /* Darker pink on hover */
+        }
+
+        /* Footer Styling */
+        footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #888;
+            text-align: center;
+        }
+
+        
+    </style>
+    <script>
+        function handleFormSubmit(event) {
+            event.preventDefault(); // Prevent default form submission
+            // Logic to handle the incident report submission can go here
+            
+            // Redirect to the community posts page
+            window.location.href = "community-posts.html";
+        }
+    </script>
+</head>
+<body>
+    <nav class="sidebar">
+        <h2>She Connect</h2>
+        <ul>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="community-posts.html">Community</a></li>
+                <li><a href="report-incident.html" class="active">Report Incident</a></li>
+                <li><a href="emergency-alert.html">Self Defense</a></li>
+                <li><a href="contact.html">Contact & Help</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+            </ul>
+        </ul>
+    </nav>
+    <div class="content">
+        <header>
+            <!-- Safety Awareness Notification Bar -->
+            <div class="top-bar">Stay informed about safety awareness resources</div>
+    
+            <header class="main-header">
+                <h1>Report an Incident</h1>
+                <p>Your report helps us create a safer environment for everyone.</p>
+            </header>
+    
+            <main>
+                <!-- Report Incident Form -->
+                <form id="incident-form" class="form" onsubmit="handleFormSubmit(event)">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+                    <label for="incident-type">Type of Incident</label>
+                    <select id="incident-type" name="incident-type" required>
+                        <option value="harassment">Harassment</option>
+                        <option value="theft">Theft</option>
+                        <option value="assault">Assault</option>
+                        <option value="vandalism">Vandalism</option>
+                        <option value="other">Other</option>
+                    </select>
+
+                    <label for="incident-details">Details of the Incident</label>
+                    <textarea id="incident-details" name="incident-details" placeholder="Describe the incident..." required></textarea>
+
+                    <button type="submit" class="submit-button">Submit Report</button>
+                </form>
+            </main>
+    
+            <footer>
+                <p>© 2024 SafeHer. All rights reserved.</p>
+            </footer>
+        </header>
+    </div>
+</body>
+</html>

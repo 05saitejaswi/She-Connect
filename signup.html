@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your Account</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Function to extract data on form submission
+        function extractData(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Extract the exact location
+            const exactLocation = document.getElementById('exact-location').value.trim();
+            console.log("Exact Location:", exactLocation); // Log the exact location
+
+            // Extract the uploaded image
+            const imageInput = document.getElementById('profile-image');
+            const imageFile = imageInput.files[0]; // Get the first file in the input
+
+            if (imageFile) {
+                console.log("Uploaded Image Name:", imageFile.name); // Log the image name
+                console.log("Uploaded Image Size:", imageFile.size); // Log the image size
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    console.log("Uploaded Image Data URL:", e.target.result); // Log the image data URL (base64 format)
+                    // Display the image or use it as needed
+                    const imgElement = document.createElement('img');
+                    imgElement.src = e.target.result; // Set the image source to the uploaded image
+                    imgElement.alt = "Uploaded Profile Image";
+                    imgElement.style.width = "100px"; // Set a size for the image
+                    imgElement.style.height = "100px"; // Set a size for the image
+                    imgElement.style.borderRadius = "50%"; // Make it circular
+                    imgElement.style.marginTop = "10px"; // Add some spacing
+                    document.body.appendChild(imgElement); // Append the image to the body or a specific section
+                };
+                reader.readAsDataURL(imageFile); // Read the file as Data URL (base64 format)
+            } else {
+                console.log("No image uploaded.");
+            }
+
+            // Extract emergency contacts
+            const emergencyContacts = [];
+            const contactInputs = document.querySelectorAll('.emergency-contact');
+            contactInputs.forEach(input => {
+                if (input.value.trim()) {
+                    emergencyContacts.push(input.value.trim());
+                }
+            });
+            console.log("Emergency Contacts:", emergencyContacts); // Log the emergency contacts
+
+            // Additional processing logic can be added here
+        }
+
+        // Function to add new emergency contact input field
+        function addEmergencyContact() {
+            const emergencyContactsContainer = document.getElementById('emergency-contacts-container');
+            if (emergencyContactsContainer.children.length < 4) { // Limit to 4 contacts
+                const newContactDiv = document.createElement('div');
+                newContactDiv.className = 'form-group';
+                newContactDiv.innerHTML = `
+                    <label for="emergency-contact">Emergency Contact</label>
+                    <input type="tel" class="emergency-contact" placeholder="Enter emergency contact number" required>
+                `;
+                emergencyContactsContainer.appendChild(newContactDiv);
+            }
+        }
+    </script>
+</head>
+<body>
+    <nav class="sidebar">
+        <h2>She Connect</h2>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="community-posts.html">Community</a></li>
+            <li><a href="report-incident.html">Report Incident</a></li>
+            <li><a href="emergency-alert.html">Self Defense</a></li>
+            <li><a href="contact.html">Contact & Help</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="signup.html" class="active">Sign Up</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <div class="signup-container">
+            <header class="signup-header">
+                <h1>Create Your Account</h1>
+                <p>Join us in making a safer world for women.</p>
+            </header>
+
+            <!-- Image Upload Section -->
+            <div class="image-upload">
+                <label for="profile-image" class="upload-label">Upload Your Profile Image:</label>
+                <input type="file" id="profile-image" name="profile-image" accept="image/*" required>
+            </div>
+
+            <form class="signup-form" onsubmit="extractData(event)">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="place">Place</label>
+                    <input type="text" id="place" name="place" placeholder="Enter your place of residence" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="exact-location">Exact Location</label>
+                    <input type="text" id="exact-location" name="exact-location" placeholder="Enter your exact location" required>
+                </div>
+
+                <div id="emergency-contacts-container">
+                    <div class="form-group">
+                        <label for="emergency-contact">Emergency Contact</label>
+                        <div class="emergency-contact-wrapper">
+                            <input type="tel" class="emergency-contact" placeholder="Enter emergency contact number" required>
+                            <button type="button" class="add-contact-button" onclick="addEmergencyContact()">+</button>
+                        </div>
+                    </div>
+                </div>
+                
+
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Create a password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+                </div>
+
+                <button type="submit" class="cta-button">Sign Up</button>
+            </form>
+
+            <div class="additional-links">
+                <a href="#" class="forgot-password">Forgot Password?</a>
+                <p>Already have an account? <a href="login.html">Log In</a></p>
+            </div>
+        </div>
+
+        <footer>
+            <img src="path-to-your-image.jpg" alt="Community Image" class="community-image">
+        </footer>
+    </div>
+</body>
+</html>

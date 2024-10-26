@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Posts</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Post List Styling */
+        #post-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+        }
+    
+        .post {
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 1rem;
+            border-left: 5px solid #f8b4c4;
+            text-align: left;
+        }
+    
+        .post p {
+            margin: 0.5rem 0;
+        }
+    
+        .post strong {
+            color: #5e3a4e;
+            font-weight: bold;
+        }
+    
+        .verified {
+            color: #4a9c81;
+            font-weight: bold;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+    
+        .police-comment {
+            margin-top: 0.5rem;
+            padding: 1rem;
+            background-color: #e3f8e7;
+            border-radius: 5px;
+            color: #5e3a4e;
+            font-style: italic;
+        }
+    
+        .police-comment strong {
+            color: #4a9c81;
+            font-weight: bold;
+        }
+    
+        /* Style for the Filter Section */
+        .filter-section {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center the filter section */
+            margin: 1rem 0; /* Add margin for spacing */
+        }
+    
+        .filter-section label {
+            margin-right: 0.5rem; /* Space between label and dropdown */
+            font-weight: bold;
+            color: #5e3a4e; /* Color for label */
+        }
+    
+        #post-filter {
+            padding: 0.5rem;
+            border-radius: 5px;
+            border: 2px solid #f8b4c4; /* Border color */
+            background-color: #ffffff; /* Background color */
+            color: #333; /* Text color */
+            font-size: 1rem; /* Font size */
+            transition: border-color 0.3s; /* Smooth transition for border color */
+        }
+    
+        #post-filter:focus {
+            border-color: #4a9c81; /* Change border color on focus */
+            outline: none; /* Remove default outline */
+        }
+    
+        /* Dropdown Options Style (if needed) */
+        #post-filter option {
+            padding: 0.5rem; /* Padding for dropdown options */
+            background-color: #ffffff; /* Option background */
+            color: #333; /* Option text color */
+        }
+    
+        #post-filter option:hover {
+            background-color: #f8b4c4; /* Change background on hover */
+            color: #fff; /* Change text color on hover */
+        }
+    </style>
+    
+</head>
+<body>
+    <nav class="sidebar">
+        <h2>She Connect</h2>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="community-posts.html" class="active">Community</a></li>
+            <li><a href="report-incident.html">Report Incident</a></li>
+            <li><a href="emergency-alert.html">Self Defense</a></li>
+            <li><a href="contact.html">Contact & Help</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="signup.html">Sign Up</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        <header>
+            <h2 style="text-align: center;">Community Posts</h2>
+            <div class="filter-section">
+                <label for="post-filter">Sort by:</label>
+                <select id="post-filter" onchange="applyFilter()">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="approved">Approved Posts</option>
+                    <option value="non-cited">Non-Cited Posts</option>
+                </select>
+            </div>
+        </header>
+
+        <div id="post-list">
+            <!-- Example post list with longer comments for detailed incidents -->
+            <div class="post" data-status="approved" data-verified="true" data-date="2024-10-25">
+                <p class="verified"><strong>Verified by Police</strong></p>
+                <p><strong>Incident:</strong> Reported by Anonymous</p>
+                <p><strong>Details:</strong> I faced a harassment attack near GSU last evening...</p>
+                <p class="police-comment"><strong>Police Comment:</strong> We have increased patrols...</p>
+            </div>
+
+            <div class="post" data-status="non-cited" data-verified="false" data-date="2024-10-24">
+                <p><strong>Incident:</strong> Reported by Anonymous</p>
+                <p><strong>Details:</strong> Last week, I noticed some suspicious activity near the campus parking lot...</p>
+            </div>
+
+            <div class="post" data-status="approved" data-verified="true" data-date="2024-10-23">
+                <p class="verified"><strong>Verified by Police</strong></p>
+                <p><strong>Incident:</strong> Reported by Anonymous</p>
+                <p><strong>Details:</strong> I was approached by an unknown person on the main road near GSU...</p>
+                <p class="police-comment"><strong>Police Comment:</strong> We are investigating this incident...</p>
+            </div>
+
+            <div class="post" data-status="approved" data-verified="true" data-date="2024-10-22">
+                <p class="verified"><strong>Verified by Police</strong></p>
+                <p><strong>Incident:</strong> Reported by Anonymous</p>
+                <p><strong>Details:</strong> I noticed someone acting strangely near the campus entrance last night...</p>
+                <p class="police-comment"><strong>Police Comment:</strong> Officers have been notified about the individual...</p>
+            </div>
+
+            <div class="post" data-status="non-cited" data-verified="false" data-date="2024-10-21">
+                <p><strong>Incident:</strong> Reported by Anonymous</p>
+                <p><strong>Details:</strong> I was waiting at a bus stop close to campus when someone approached me...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function applyFilter() {
+            const filterValue = document.getElementById('post-filter').value;
+            const posts = document.querySelectorAll('.post');
+            const postList = document.getElementById('post-list');
+
+            let filteredPosts = Array.from(posts);
+
+            if (filterValue === 'newest') {
+                filteredPosts.sort((a, b) => new Date(b.getAttribute('data-date')) - new Date(a.getAttribute('data-date')));
+            } else if (filterValue === 'oldest') {
+                filteredPosts.sort((a, b) => new Date(a.getAttribute('data-date')) - new Date(b.getAttribute('data-date')));
+            } else if (filterValue === 'approved') {
+                filteredPosts = filteredPosts.filter(post => post.getAttribute('data-status') === 'approved');
+            } else if (filterValue === 'non-cited') {
+                filteredPosts = filteredPosts.filter(post => post.getAttribute('data-status') === 'non-cited');
+            }
+
+            postList.innerHTML = ''; // Clear the post list
+
+            filteredPosts.forEach(post => {
+                postList.appendChild(post); // Append the filtered and sorted posts
+            });
+        }
+    </script>
+</body>
+</html>
